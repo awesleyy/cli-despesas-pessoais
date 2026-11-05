@@ -39,3 +39,12 @@ def filtrar_categoria(lista_transacoes, categoria):
             lista_filtrada.append(transacao)
     return lista_filtrada
 
+
+def calcular_saldo(lista_transacoes):
+    valor_receitas = 0
+    for transacao in lista_transacoes:
+        if transacao["tipo"] == "receita":
+            valor_receitas += transacao["valor"]
+    valor_despesas = calcular_total_despesas(lista_transacoes)
+
+    return valor_receitas - valor_despesas
