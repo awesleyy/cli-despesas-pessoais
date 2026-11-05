@@ -1,10 +1,10 @@
-def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
+def adicionar_transacao(lista_transacoes, data, tipo, categoria, valor):
 
     nova_transacao = {
-        "valor": valor,
-        "categoria": categoria,
         "data": data,
-        "tipo": tipo
+        "tipo": tipo,
+        "valor": valor,
+        "categoria": categoria
     }
 
     lista_transacoes.append(nova_transacao)
@@ -18,3 +18,8 @@ def listar_transacoes(lista_transacoes):
     for posicao, transacao in enumerate(lista_transacoes):
         print(f"{posicao}: {transacao['data']}, {transacao['tipo']}, "
               f"{transacao['categoria']}, {transacao['valor']:.2f}")
+
+
+def remover_transacao(lista_transacoes, posicao_transacao):
+    return(lista_transacoes.pop(posicao_transacao))
+
