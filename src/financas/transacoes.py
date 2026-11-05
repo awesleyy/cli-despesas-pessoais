@@ -1,4 +1,4 @@
-def adicionar_transacao(lista_transacoes, data, tipo, categoria, valor):
+def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
 
     nova_transacao = {
         "data": data,
@@ -21,7 +21,7 @@ def listar_transacoes(lista_transacoes):
 
 
 def remover_transacao(lista_transacoes, posicao_transacao):
-    return(lista_transacoes.pop(posicao_transacao))
+    return lista_transacoes.pop(posicao_transacao)
 
 
 def calcular_total_despesas(lista_transacoes):
