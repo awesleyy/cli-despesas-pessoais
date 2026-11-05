@@ -23,3 +23,11 @@ def listar_transacoes(lista_transacoes):
 def remover_transacao(lista_transacoes, posicao_transacao):
     return(lista_transacoes.pop(posicao_transacao))
 
+
+def calcular_total_despesas(lista_transacoes):
+    valor_despesas = 0
+    for transacao in lista_transacoes:
+        if transacao["tipo"] == "despesa":
+            valor_despesas += transacao["valor"]
+    return valor_despesas
+
