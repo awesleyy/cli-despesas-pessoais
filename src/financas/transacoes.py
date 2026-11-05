@@ -1,5 +1,14 @@
-def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
+from datetime import datetime
 
+def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
+    if not (isinstance(valor, (float, int))) or valor <= 0:
+        raise ValueError("O valor não pode ser negativo ou igual a 0, e deve ser um número")
+    try:
+        datetime.strptime(data, "%Y-%m-%d")
+    except ValueError:
+        raise ValueError("Digite uma data válida.")
+    if tipo != "despesa" and tipo != "receita":
+        raise ValueError("Tipo da transação inválida, informe um tipo válido.")
     nova_transacao = {
         "data": data,
         "tipo": tipo,
