@@ -31,3 +31,11 @@ def calcular_total_despesas(lista_transacoes):
             valor_despesas += transacao["valor"]
     return valor_despesas
 
+
+def filtrar_categoria(lista_transacoes, categoria):
+    lista_filtrada = []
+    for transacao in lista_transacoes:
+        if transacao["categoria"] == categoria:
+            lista_filtrada.append(transacao)
+    return lista_filtrada
+
