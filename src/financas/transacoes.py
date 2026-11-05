@@ -30,6 +30,8 @@ def listar_transacoes(lista_transacoes):
 
 
 def remover_transacao(lista_transacoes, posicao_transacao):
+    if not isinstance(posicao_transacao, int) or posicao_transacao >= len(lista_transacoes) or posicao_transacao < 0:
+        raise ValueError("Posição inválida, informe uma posição válida")
     return lista_transacoes.pop(posicao_transacao)
 
 
