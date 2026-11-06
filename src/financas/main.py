@@ -13,6 +13,8 @@ def exibir_menu():
 
 
 def main():
+    lista_transacoes = []
+
     while True:
         exibir_menu()
         try:
@@ -22,8 +24,20 @@ def main():
             continue
         if opcao == 0:
             break
-        if opcao < 0 or opcao > 6:
-            print("Digite um número de 0 a 6.")
+        elif opcao == 1:
+            pass #função 1
+        elif opcao == 2:
+            pass #função 2
+        elif opcao == 3:
+            pass #função 3
+        elif opcao == 4:
+            pass #função 4
+        elif opcao == 5:
+            pass #função 5
+        elif opcao == 6:
+            pass #função 6
+        else:
+            print("Opção inválida.")
 
 
 if __name__ == "__main__":
