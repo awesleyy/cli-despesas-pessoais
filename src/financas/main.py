@@ -34,7 +34,7 @@ def opcao_remover(lista_transacoes):
 
 
 def opcao_total_despesas(lista_transacoes):
-    pass
+    print(f"Valor Total das Despesas: R$ {transacoes.calcular_total_despesas(lista_transacoes):.2f}")
 
 
 def opcao_saldo(lista_transacoes):
