@@ -59,7 +59,9 @@ def opcao_saldo(lista_transacoes):
 
 
 def opcao_filtrar(lista_transacoes):
-    pass
+    categoria = input("Informe a categoria das transações que deseja filtrar: ")
+    lista_filtrada = transacoes.filtrar_categoria(lista_transacoes, categoria)
+    transacoes.listar_transacoes(lista_filtrada)
 
 
 def main():
