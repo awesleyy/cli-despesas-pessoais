@@ -1,6 +1,5 @@
 from . import transacoes
 
-
 def exibir_menu():
     print("\n--- Sistema de Finanças ---")
     print("1 - Adicionar Transação.")
@@ -13,7 +12,20 @@ def exibir_menu():
 
 
 def opcao_adicionar(lista_transacoes):
-    pass
+    try:
+        valor = float(input("Informe o valor da transação: "))
+    except ValueError:
+        print("Digite somente números.")
+        return
+
+    categoria = input("Informe a categoria da transação: ")
+    data = input("Informe a data da transação (Ano-Mês-Dia): ")
+    tipo = input("Informe o tipo de transação ('receita' ou 'despesa'): ")
+
+    try:
+        transacoes.adicionar_transacao(lista_transacoes, valor, categoria, data, tipo)
+    except ValueError as erro:
+        print(erro)
 
 
 def opcao_listar(lista_transacoes):
