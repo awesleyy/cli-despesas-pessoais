@@ -38,7 +38,12 @@ def opcao_total_despesas(lista_transacoes):
 
 
 def opcao_saldo(lista_transacoes):
-    pass
+    saldo = transacoes.calcular_saldo(lista_transacoes)
+    if saldo < 0:
+        abs(saldo)
+        print(f"Saldo Atual: -R$ {saldo:.2f}")
+    else:
+        print(f"Saldo Atual: R$ {saldo:.2f}")
 
 
 def opcao_filtrar(lista_transacoes):
