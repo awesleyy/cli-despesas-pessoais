@@ -17,7 +17,7 @@ def opcao_adicionar(lista_transacoes):
 
 
 def opcao_listar(lista_transacoes):
-    pass
+    transacoes.listar_transacoes(lista_transacoes)
 
 
 def opcao_remover(lista_transacoes):
