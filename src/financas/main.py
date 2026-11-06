@@ -21,7 +21,16 @@ def opcao_listar(lista_transacoes):
 
 
 def opcao_remover(lista_transacoes):
-    pass
+    try:
+        posicao = int(input("Informe o número de transação: "))
+    except ValueError:
+        print("Digite um número inteiro.")
+        return
+
+    try:
+        transacoes.remover_transacao(lista_transacoes, posicao)
+    except ValueError as erro:
+        print(erro)
 
 
 def opcao_total_despesas(lista_transacoes):
