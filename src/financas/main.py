@@ -12,6 +12,30 @@ def exibir_menu():
     print("0 - Sair")
 
 
+def opcao_adicionar(lista_transacoes):
+    pass
+
+
+def opcao_listar(lista_transacoes):
+    pass
+
+
+def opcao_remover(lista_transacoes):
+    pass
+
+
+def opcao_total_despesas(lista_transacoes):
+    pass
+
+
+def opcao_saldo(lista_transacoes):
+    pass
+
+
+def opcao_filtrar(lista_transacoes):
+    pass
+
+
 def main():
     lista_transacoes = []
 
@@ -25,17 +49,17 @@ def main():
         if opcao == 0:
             break
         elif opcao == 1:
-            pass #função 1
+            opcao_adicionar(lista_transacoes)
         elif opcao == 2:
-            pass #função 2
+            opcao_listar(lista_transacoes)
         elif opcao == 3:
-            pass #função 3
+            opcao_remover(lista_transacoes)
         elif opcao == 4:
-            pass #função 4
+            opcao_total_despesas(lista_transacoes)
         elif opcao == 5:
-            pass #função 5
+            opcao_saldo(lista_transacoes)
         elif opcao == 6:
-            pass #função 6
+            opcao_filtrar(lista_transacoes)
         else:
             print("Opção inválida.")
 
