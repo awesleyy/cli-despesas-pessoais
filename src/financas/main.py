@@ -24,6 +24,7 @@ def opcao_adicionar(lista_transacoes):
 
     try:
         transacoes.adicionar_transacao(lista_transacoes, valor, categoria, data, tipo)
+        print("Transação adicionada com sucesso!")
     except ValueError as erro:
         print(erro)
 
@@ -41,6 +42,7 @@ def opcao_remover(lista_transacoes):
 
     try:
         transacoes.remover_transacao(lista_transacoes, posicao)
+        print("Transação removida com sucesso!")
     except ValueError as erro:
         print(erro)
 
