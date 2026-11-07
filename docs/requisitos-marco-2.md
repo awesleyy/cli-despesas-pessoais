@@ -3,7 +3,7 @@
 Projeto: CLI de finanças pessoais
 Branch: `feature/marco-2-validacao-menu` (a partir da `develop`)
 Conceitos: exceções (`raise`, `try/except`), `input()`, laço `while`, organização de funções
-Status do marco: **requisitos implementados** (falta o teste manual geral)
+Status do marco: **concluído**
 
 ## Regras gerais
 
@@ -21,7 +21,7 @@ Status do marco: **requisitos implementados** (falta o teste manual geral)
 
 | ID | Onde | Regra | Aceite | Status |
 |----|------|-------|--------|--------|
-| RF-07 | `adicionar_transacao` | `valor` é `int` ou `float` maior que zero | `0`, negativo e texto levantam `ValueError`; a lista não muda | concluído |
+| RF-07 | `adicionar_transacao` | `valor` é `int` ou `float` finito e maior que zero | `0`, negativo, texto, `nan` e infinito levantam `ValueError`; a lista não muda | concluído |
 | RF-08 | `adicionar_transacao` | `tipo` é `"receita"` ou `"despesa"` | qualquer outro valor (inclusive `"Despesa"`) levanta `ValueError`; a lista não muda | concluído |
 | RF-09 | `adicionar_transacao` | `data` é uma data real no formato `AAAA-MM-DD` | `2026-13-40` e `05/11/2026` levantam `ValueError`; a lista não muda | concluído |
 | RF-10 | `remover_transacao` | posição é inteira e existe na lista | negativa, igual ou maior que o tamanho da lista e texto levantam `ValueError` | concluído |
@@ -51,6 +51,7 @@ Status do marco: **requisitos implementados** (falta o teste manual geral)
 - **Quem levanta e quem trata:** `transacoes.py` levanta `ValueError`; `main.py` captura e mostra. Assim a mesma lógica serve a uma API no futuro (Fase 2).
 - **`try/except` na lógica só para traduzir:** o `strptime` levanta um `ValueError` técnico; a função captura e relança o seu, sem imprimir.
 - **Confirmação dentro do `try`**, logo depois da chamada, para só rodar se ela não falhou.
+- **`nan` e infinito rejeitados** com `math.isfinite`, depois do `isinstance` na mesma condição: com `or`, um valor que não é número nunca chega ao `isfinite` (que daria `TypeError` com texto).
 - **Exibição do saldo negativo:** `-R$ 300.00`.
 - **Filtro:** reaproveita `listar_transacoes` para exibir o resultado.
 
@@ -70,17 +71,6 @@ Status do marco: **requisitos implementados** (falta o teste manual geral)
 - [x] Entradas tratadas (RF-16) e confirmações (RF-17).
 - [x] Commits em Conventional Commits.
 - [x] Teste manual geral: digitar lixo (`abc`, vazio, negativos, espaços) em **cada** entrada, sem derrubar o programa.
-
-## Casos para virar testes no Marco 5
-
-- valor `0`, `-5`, `"abc"` na adicionar; `100` (inteiro) e `50.5` aceitos
-- tipo `"Despesa"` (maiúscula) e `"gasto"`
-- data `2026-13-40`, `05/11/2026` e vazia
-- remover com posição `-1`, `99`, `"a"` e uma posição válida
-- a lista **não muda** quando a validação falha
-- opção do menu `abc`, `9`, vazia e `0`
-- saldo positivo, zero, vazio e negativo
-- filtro com categoria existente, inexistente e vazia
 
 ## Próximo marco
 
