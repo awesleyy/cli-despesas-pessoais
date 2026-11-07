@@ -1,7 +1,9 @@
 from datetime import datetime
+import math
+
 
 def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
-    if not (isinstance(valor, (float, int))) or valor <= 0:
+    if not (isinstance(valor, (float, int))) or valor <= 0 or not math.isfinite(valor):
         raise ValueError("O valor não pode ser negativo ou igual a 0, e deve ser um número")
     try:
         datetime.strptime(data, "%Y-%m-%d")
