@@ -1,5 +1,16 @@
-def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
+from datetime import datetime
+import math
 
+
+def adicionar_transacao(lista_transacoes, valor, categoria, data, tipo):
+    if not (isinstance(valor, (float, int))) or valor <= 0 or not math.isfinite(valor):
+        raise ValueError("O valor não pode ser negativo ou igual a 0, e deve ser um número")
+    try:
+        datetime.strptime(data, "%Y-%m-%d")
+    except ValueError:
+        raise ValueError("Digite uma data válida.")
+    if tipo != "despesa" and tipo != "receita":
+        raise ValueError("Tipo da transação inválida, informe um tipo válido.")
     nova_transacao = {
         "data": data,
         "tipo": tipo,
@@ -21,6 +32,8 @@ def listar_transacoes(lista_transacoes):
 
 
 def remover_transacao(lista_transacoes, posicao_transacao):
+    if not isinstance(posicao_transacao, int) or posicao_transacao >= len(lista_transacoes) or posicao_transacao < 0:
+        raise ValueError("Posição inválida, informe uma posição válida")
     return lista_transacoes.pop(posicao_transacao)
 
 
