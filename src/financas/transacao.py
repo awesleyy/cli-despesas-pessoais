@@ -19,3 +19,6 @@ class Transacao:
         self.categoria = categoria
         self.data = data
         self.tipo = tipo
+
+    def __str__(self):
+        return f"{self.data}, {self.tipo}, {self.categoria}, {self.valor:.2f}"
