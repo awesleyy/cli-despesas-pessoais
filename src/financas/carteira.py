@@ -29,3 +29,11 @@ class Carteira:
             if transacao.tipo == "despesa":
                 valor_despesas += transacao.valor
         return valor_despesas
+
+    def calcular_saldo(self):
+        valor_receitas = 0
+        for transacao in self._transacoes:
+            if transacao.tipo == "receita":
+                valor_receitas += transacao.valor
+        valor_despesas = self.calcular_total_despesas()
+        return valor_receitas - valor_despesas
