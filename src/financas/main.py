@@ -1,4 +1,6 @@
-from . import transacoes
+from .carteira import Carteira
+from .transacao import Transacao
+
 
 def exibir_menu():
     print("\n--- Sistema de Finanças ---")
@@ -11,7 +13,7 @@ def exibir_menu():
     print("0 - Sair")
 
 
-def opcao_adicionar(lista_transacoes):
+def opcao_adicionar(carteira):
     try:
         valor = float(input("Informe o valor da transação: "))
     except ValueError:
@@ -23,17 +25,18 @@ def opcao_adicionar(lista_transacoes):
     tipo = input("Informe o tipo de transação ('receita' ou 'despesa'): ")
 
     try:
-        transacoes.adicionar_transacao(lista_transacoes, valor, categoria, data, tipo)
+        nova_transacao = Transacao(valor, categoria, data, tipo)
+        carteira.adicionar_transacao(nova_transacao)
         print("Transação adicionada com sucesso!")
     except ValueError as erro:
         print(erro)
 
 
-def opcao_listar(lista_transacoes):
-    transacoes.listar_transacoes(lista_transacoes)
+def opcao_listar(carteira):
+    carteira.listar_transacoes()
 
 
-def opcao_remover(lista_transacoes):
+def opcao_remover(carteira):
     try:
         posicao = int(input("Informe o número de transação: "))
     except ValueError:
@@ -41,18 +44,18 @@ def opcao_remover(lista_transacoes):
         return
 
     try:
-        transacoes.remover_transacao(lista_transacoes, posicao)
+        carteira.remover_transacao(posicao)
         print("Transação removida com sucesso!")
     except ValueError as erro:
         print(erro)
 
 
-def opcao_total_despesas(lista_transacoes):
-    print(f"Valor Total das Despesas: R$ {transacoes.calcular_total_despesas(lista_transacoes):.2f}")
+def opcao_total_despesas(carteira):
+    print(f"Valor Total das Despesas: R$ {carteira.calcular_total_despesas():.2f}")
 
 
-def opcao_saldo(lista_transacoes):
-    saldo = transacoes.calcular_saldo(lista_transacoes)
+def opcao_saldo(carteira):
+    saldo = carteira.calcular_saldo()
     if saldo < 0:
         saldo = abs(saldo)
         print(f"Saldo Atual: -R$ {saldo:.2f}")
@@ -60,14 +63,14 @@ def opcao_saldo(lista_transacoes):
         print(f"Saldo Atual: R$ {saldo:.2f}")
 
 
-def opcao_filtrar(lista_transacoes):
+def opcao_filtrar(carteira):
     categoria = input("Informe a categoria das transações que deseja filtrar: ")
-    lista_filtrada = transacoes.filtrar_categoria(lista_transacoes, categoria)
-    transacoes.listar_transacoes(lista_filtrada)
+    carteira_filtrada = carteira.filtrar_categoria(categoria)
+    carteira_filtrada.listar_transacoes()
 
 
 def main():
-    lista_transacoes = []
+    carteira = Carteira()
 
     while True:
         exibir_menu()
@@ -79,17 +82,17 @@ def main():
         if opcao == 0:
             break
         elif opcao == 1:
-            opcao_adicionar(lista_transacoes)
+            opcao_adicionar(carteira)
         elif opcao == 2:
-            opcao_listar(lista_transacoes)
+            opcao_listar(carteira)
         elif opcao == 3:
-            opcao_remover(lista_transacoes)
+            opcao_remover(carteira)
         elif opcao == 4:
-            opcao_total_despesas(lista_transacoes)
+            opcao_total_despesas(carteira)
         elif opcao == 5:
-            opcao_saldo(lista_transacoes)
+            opcao_saldo(carteira)
         elif opcao == 6:
-            opcao_filtrar(lista_transacoes)
+            opcao_filtrar(carteira)
         else:
             print("Opção inválida.")
 
