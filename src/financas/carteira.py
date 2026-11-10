@@ -37,3 +37,10 @@ class Carteira:
                 valor_receitas += transacao.valor
         valor_despesas = self.calcular_total_despesas()
         return valor_receitas - valor_despesas
+
+    def filtrar_categoria(self, categoria):
+        carteira_filtrada = Carteira()
+        for transacao in self._transacoes:
+            if transacao.categoria == categoria:
+                carteira_filtrada.adicionar_transacao(transacao)
+        return carteira_filtrada
