@@ -15,8 +15,8 @@ class Carteira:
             print("Lista de transações vazia.")
             return
 
-        for posicao, transacao in enumerate(self._transacoes):
-            print(f"{posicao}: {transacao}")
+        for transacao in self._transacoes:
+            print(transacao)
 
     def remover_transacao(self, posicao_transacao):
         if not isinstance(posicao_transacao, int) or posicao_transacao >= len(self._transacoes) or posicao_transacao < 0:

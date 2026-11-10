@@ -23,4 +23,4 @@ class Transacao:
         self.id = id
 
     def __str__(self):
-        return f"{self.data}, {self.tipo}, {self.categoria}, {self.valor:.2f}"
+        return f"{self.id}: {self.data}, {self.tipo}, {self.categoria}, {self.valor:.2f}"
