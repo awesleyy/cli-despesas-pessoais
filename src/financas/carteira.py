@@ -17,3 +17,8 @@ class Carteira:
 
         for posicao, transacao in enumerate(self._transacoes):
             print(f"{posicao}: {transacao}")
+
+    def remover_transacao(self, posicao_transacao):
+        if not isinstance(posicao_transacao, int) or posicao_transacao >= len(self._transacoes) or posicao_transacao < 0:
+            raise ValueError("Posição inválida, informe uma posição válida")
+        return self._transacoes.pop(posicao_transacao)
