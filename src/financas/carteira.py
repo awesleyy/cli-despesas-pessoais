@@ -22,3 +22,10 @@ class Carteira:
         if not isinstance(posicao_transacao, int) or posicao_transacao >= len(self._transacoes) or posicao_transacao < 0:
             raise ValueError("Posição inválida, informe uma posição válida")
         return self._transacoes.pop(posicao_transacao)
+
+    def calcular_total_despesas(self):
+        valor_despesas = 0
+        for transacao in self._transacoes:
+            if transacao.tipo == "despesa":
+                valor_despesas += transacao.valor
+        return valor_despesas
