@@ -47,3 +47,6 @@ class RepositorioTransacoes:
         if cursor.rowcount == 0:
             raise ValueError("Id inválido, informe um id existente.")
         self._conexao.commit()
+
+    def fechar_banco(self):
+        self._conexao.close()
