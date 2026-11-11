@@ -18,7 +18,7 @@ class RepositorioTransacoes:
         cursor.execute(comando_sql)
         self._conexao.commit()
 
-    def salvar_transacao(self, transacao):
+    def salvar_transacao_banco(self, transacao):
         if not isinstance(transacao, Transacao):
             raise TypeError("Esperando um objeto Transacao")
         if transacao.id is not None:
@@ -29,7 +29,7 @@ class RepositorioTransacoes:
         self._conexao.commit()
         transacao.id = cursor.lastrowid
 
-    def carregar_transacoes(self):
+    def carregar_transacoes_banco(self):
         cursor = self._conexao.cursor()
         cursor.execute("SELECT id, valor, categoria, data, tipo FROM transacoes ORDER BY id")
         linhas = cursor.fetchall()
@@ -39,7 +39,7 @@ class RepositorioTransacoes:
             lista_transacoes.append(transacao)
         return lista_transacoes
 
-    def remover_transacao(self, id_transacao):
+    def remover_transacao_banco(self, id_transacao):
         if not isinstance(id_transacao, int) or isinstance(id_transacao, bool):
             raise ValueError("Id inválido, informe um id existente.")
         cursor = self._conexao.cursor()
