@@ -1,4 +1,5 @@
 import sqlite3
+from .transacao import Transacao
 
 
 class RepositorioTransacoes:
@@ -16,3 +17,14 @@ class RepositorioTransacoes:
         """
         cursor.execute(comando_sql)
         self._conexao.commit()
+
+    def salvar_transacao(self, transacao):
+        if not isinstance(transacao, Transacao):
+            raise TypeError("Esperando um objeto Transacao")
+        if transacao.id is not None:
+            raise ValueError("Transação já salva.")
+        cursor = self._conexao.cursor()
+        cursor.execute("INSERT INTO transacoes (valor, categoria, data, tipo) VALUES (?, ?, ?, ?)",
+                        (transacao.valor, transacao.categoria, transacao.data, transacao.tipo))
+        self._conexao.commit()
+        transacao.id = cursor.lastrowid
