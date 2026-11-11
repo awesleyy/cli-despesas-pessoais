@@ -1,5 +1,8 @@
 from .carteira import Carteira
 from .transacao import Transacao
+from .repositorio import RepositorioTransacoes
+
+CAMINHO_BANCO = "financas.db"
 
 
 def exibir_menu():
@@ -13,7 +16,7 @@ def exibir_menu():
     print("0 - Sair")
 
 
-def opcao_adicionar(carteira):
+def opcao_adicionar(carteira, repositorio):
     try:
         valor = float(input("Informe o valor da transação: "))
     except ValueError:
@@ -26,6 +29,7 @@ def opcao_adicionar(carteira):
 
     try:
         nova_transacao = Transacao(valor, categoria, data, tipo)
+        repositorio.salvar_transacao_banco(nova_transacao)
         carteira.adicionar_transacao(nova_transacao)
         print("Transação adicionada com sucesso!")
     except ValueError as erro:
@@ -36,15 +40,16 @@ def opcao_listar(carteira):
     carteira.listar_transacoes()
 
 
-def opcao_remover(carteira):
+def opcao_remover(carteira, repositorio):
     try:
-        posicao = int(input("Informe o número de transação: "))
+        id_transacao = int(input("Informe o id da transação: "))
     except ValueError:
         print("Digite um número inteiro.")
         return
 
     try:
-        carteira.remover_transacao(posicao)
+        repositorio.remover_transacao_banco(id_transacao)
+        carteira.remover_transacao(id_transacao)
         print("Transação removida com sucesso!")
     except ValueError as erro:
         print(erro)
@@ -70,7 +75,11 @@ def opcao_filtrar(carteira):
 
 
 def main():
+    repositorio = RepositorioTransacoes(CAMINHO_BANCO)
+    lista_db = repositorio.carregar_transacoes_banco()
     carteira = Carteira()
+    for transacao in lista_db:
+        carteira.adicionar_transacao(transacao)
 
     while True:
         exibir_menu()
@@ -80,13 +89,14 @@ def main():
             print("Dígito inválido.")
             continue
         if opcao == 0:
+            repositorio.fechar_banco()
             break
         elif opcao == 1:
-            opcao_adicionar(carteira)
+            opcao_adicionar(carteira, repositorio)
         elif opcao == 2:
             opcao_listar(carteira)
         elif opcao == 3:
-            opcao_remover(carteira)
+            opcao_remover(carteira, repositorio)
         elif opcao == 4:
             opcao_total_despesas(carteira)
         elif opcao == 5:

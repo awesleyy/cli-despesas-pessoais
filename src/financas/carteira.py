@@ -15,13 +15,21 @@ class Carteira:
             print("Lista de transações vazia.")
             return
 
-        for posicao, transacao in enumerate(self._transacoes):
-            print(f"{posicao}: {transacao}")
+        for transacao in self._transacoes:
+            print(transacao)
 
-    def remover_transacao(self, posicao_transacao):
-        if not isinstance(posicao_transacao, int) or posicao_transacao >= len(self._transacoes) or posicao_transacao < 0:
-            raise ValueError("Posição inválida, informe uma posição válida")
-        return self._transacoes.pop(posicao_transacao)
+    def remover_transacao(self, id_transacao):
+        if not isinstance(id_transacao, int) or isinstance(id_transacao, bool):
+            raise ValueError("Id inválido, informe um id existente.")
+        posicao = 0
+        for transacao in self._transacoes:
+            if transacao.id != id_transacao:
+                posicao += 1
+            else:
+                break
+        if posicao >= len(self._transacoes):
+            raise ValueError("Id inválido, informe um id existente.")
+        return self._transacoes.pop(posicao)
 
     def calcular_total_despesas(self):
         valor_despesas = 0
