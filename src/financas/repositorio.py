@@ -38,3 +38,12 @@ class RepositorioTransacoes:
             transacao = Transacao(linha[1], linha[2], linha[3], linha[4], linha[0])
             lista_transacoes.append(transacao)
         return lista_transacoes
+
+    def remover_transacao(self, id_transacao):
+        if not isinstance(id_transacao, int) or isinstance(id_transacao, bool):
+            raise ValueError("Id inválido, informe um id existente.")
+        cursor = self._conexao.cursor()
+        cursor.execute("DELETE FROM transacoes WHERE id = ?", (id_transacao,))
+        if cursor.rowcount == 0:
+            raise ValueError("Id inválido, informe um id existente.")
+        self._conexao.commit()
