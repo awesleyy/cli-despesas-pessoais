@@ -1,5 +1,8 @@
 from .carteira import Carteira
 from .transacao import Transacao
+from .repositorio import RepositorioTransacoes
+
+CAMINHO_BANCO = "financas.db"
 
 
 def exibir_menu():
@@ -70,7 +73,11 @@ def opcao_filtrar(carteira):
 
 
 def main():
+    repositorio = RepositorioTransacoes(CAMINHO_BANCO)
+    lista_db = repositorio.carregar_transacoes()
     carteira = Carteira()
+    for transacao in lista_db:
+        carteira.adicionar_transacao(transacao)
 
     while True:
         exibir_menu()
