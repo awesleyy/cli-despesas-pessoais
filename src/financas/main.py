@@ -89,6 +89,7 @@ def main():
             print("Dígito inválido.")
             continue
         if opcao == 0:
+            repositorio.fechar_banco()
             break
         elif opcao == 1:
             opcao_adicionar(carteira, repositorio)
