@@ -28,3 +28,13 @@ class RepositorioTransacoes:
                         (transacao.valor, transacao.categoria, transacao.data, transacao.tipo))
         self._conexao.commit()
         transacao.id = cursor.lastrowid
+
+    def carregar_transacoes(self):
+        cursor = self._conexao.cursor()
+        cursor.execute("SELECT id, valor, categoria, data, tipo FROM transacoes ORDER BY id")
+        linhas = cursor.fetchall()
+        lista_transacoes = []
+        for linha in linhas:
+            transacao = Transacao(linha[1], linha[2], linha[3], linha[4], linha[0])
+            lista_transacoes.append(transacao)
+        return lista_transacoes
